@@ -414,6 +414,7 @@ p {
     background: var(--gradient-primary);
     overflow: hidden;
     position: relative;
+    padding: 0;
 }
 
 .hero::before {
@@ -475,6 +476,7 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    min-height: calc(100vh - 80px);
 }
 
 .hero-text {
@@ -1696,16 +1698,27 @@ p {
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
     }
     
     .hero {
-        min-height: 90vh;
-        padding: 2rem 0;
+        min-height: 100vh;
+        padding: 0;
+        margin-top: 80px; /* Navbar height */
     }
     
     .hero-content {
+        grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 0 15px;
+        padding: 2rem 15px;
+        margin-top: 0;
+        min-height: calc(100vh - 80px);
+        align-items: center;
+        justify-content: center;
     }
     
     .hero-description {
@@ -1731,6 +1744,7 @@ p {
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
         width: 100%;
+        height: calc(100vh - 80px);
         text-align: center;
         transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--shadow-luxury);
@@ -1739,6 +1753,8 @@ p {
         gap: 0;
         border-radius: 0;
         border: none;
+        overflow-y: auto;
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -1779,6 +1795,11 @@ p {
     
     .logo-text span {
         font-size: 0.9rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
     }
 
     .nav-menu.active {
@@ -1948,12 +1969,21 @@ p {
         padding: 0 15px;
     }
 
+    .hero {
+        margin-top: 70px; /* Smaller navbar height for mobile */
+    }
+    
+    .hero-content {
+        padding: 1.5rem 15px;
+        min-height: calc(100vh - 70px);
+    }
+
     .hero-title .highlight {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 
     .hero-title .subtitle {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
     .hero-buttons {
@@ -2000,7 +2030,7 @@ p {
     }
     
     .navbar {
-        padding: 1rem 0;
+        padding: 0.8rem 0;
     }
     
     .nav-container {
@@ -2013,6 +2043,11 @@ p {
     
     .logo-text span {
         font-size: 0.8rem;
+    }
+    
+    .nav-menu {
+        top: 70px;
+        height: calc(100vh - 70px);
     }
 }
 

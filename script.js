@@ -6,6 +6,13 @@ navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
     navToggle.classList.toggle('active');
     
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        document.body.classList.add('menu-open');
+    } else {
+        document.body.classList.remove('menu-open');
+    }
+    
     // Add luxury click effect
     navToggle.style.transform = 'scale(0.95)';
     navToggle.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.4)';
@@ -21,11 +28,23 @@ navToggle.addEventListener('click', () => {
     }
 });
 
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && 
+        !navMenu.contains(e.target) && 
+        !navToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
+});
+
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
     });
 });
 
